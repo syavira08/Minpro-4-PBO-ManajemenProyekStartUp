@@ -67,32 +67,32 @@ Tampilan awal program saat pertama kali dijalankan menampilkan banner SISTEM MAN
 Disini pengguna diarahkan ke menu sesuai dengan angka yang dimasukkan. Setiap menu memiliki fungsi yang berbeda untuk mengelola data proyek. Berikut adalah penjelasan dari setiap menu yang tersedia pada program:
 
 - **Menu 1: Tambah Proyek**
-  > <img width="550" alt="image" src="https://github.com/user-attachments/assets/9744da08-0178-4e33-86de-82afee726ed2" />
+  > <img width="550" alt="image" src="https://github.com/user-attachments/assets/625d7ed9-07d7-4885-88f4-391a4e93ad2d" />
   Pengguna pertama-tama memilih jenis proyek yaitu Internal atau Klien. Setelah itu, program meminta data satu per satu yang terdiri dari ID (berupa angka), nama, deadline, dan data khusus sesuai jenis proyeknya. Jika semua data valid, proyek baru dibuat dan disimpan ke database.
 
   Salah satu contoh validasi data adalah jika ID yang dimasukkan sudah digunakan (dicek langsung ke database), program memberi tahu pengguna lalu menampilkan kembali bagian `INFORMASI PROYEK` dan meminta ID baru sampai ID yang dimasukkan belum pernah dipakai:
-  ><img width="409" height="147" alt="image" src="https://github.com/user-attachments/assets/0d32d6cc-acd3-4109-9312-d8ae91966749" />
+  ><img width="400" alt="image" src="https://github.com/user-attachments/assets/d47fcad1-d24b-4416-a694-7c681ed82aa7" />
 
   Berikut tampilan semua proyek yang menunjukkan bahwa proyek berhasil ditambahkan.
-  > <img width="400" alt="image" src="https://github.com/user-attachments/assets/da0f6ed9-4193-40f4-b96b-9364a6f5e073" />
+  > <img width="400" alt="image" src="https://github.com/user-attachments/assets/cb3f7112-5ad6-44c3-be49-b52d61c2fbff" />
 
 - **Menu 2: Tampilkan Semua Proyek**
-  > <img width="380" alt="image" src="https://github.com/user-attachments/assets/6ce7fc00-e7b3-4bf5-98b7-50c211e0fb46" />
+  > <img width="500" alt="image" src="https://github.com/user-attachments/assets/ead5833d-52d0-4cd8-8f61-4109557e510f" />
   Program membaca seluruh data proyek dari database dan menampilkannya, lengkap dengan nomor urut dan jenis proyeknya.
 
 - **Menu 3: Update Proyek**
-  > <img width="500" alt="image" src="https://github.com/user-attachments/assets/4aa03887-7781-46b4-8fa1-3646f2a3877a" />
+  > <img width="500" alt="image" src="https://github.com/user-attachments/assets/df2a9116-8347-4bd5-bbca-9ab3414ac29f" />
   Pengguna memasukkan ID proyek yang ingin diubah lalu program akan mencari proyek tersebut di database. Setelah ditemukan, data lama ditampilkan terlebih dahulu sebagai pembanding, kemudian pengguna diminta memasukkan data baru. Program otomatis mendeteksi apakah proyek tersebut jenis Internal atau Klien, sehingga pertanyaan yang muncul menyesuaikan.
 
   Pada bagian bawah setelah data lama, pengguna cukup menekan Enter jika tidak ingin mengubah suatu data, sehingga data lama tetap dipertahankan. Khusus deadline, jika pengguna memasukkan nilai yang formatnya salah, program akan meminta input ulang sampai formatnya benar atau pengguna menekan Enter. Perubahan kemudian disimpan ke database.
 
-  > <img width="400" alt="image" src="https://github.com/user-attachments/assets/c41024a4-c91f-46c6-b263-6d303efeeced" />
+  > <img width="400" alt="image" src="https://github.com/user-attachments/assets/5b5b44c4-b46b-450b-bbdb-de2018e3c806" />
   Gambar diatas merupakan tampilan semua proyek yang menunjukkan bahwa proyek berhasil diupdate.
 
 - **Menu 4: Hapus Proyek**
-  > <img width="400" alt="image" src="https://github.com/user-attachments/assets/b2f6d86a-237e-45f2-952c-29ebae89d447" />
+  > <img width="400" alt="image" src="https://github.com/user-attachments/assets/4dc7ae3c-815e-4893-835e-34a79e28d0e4" />
   Pengguna diarahkan untuk memasukkan ID proyek yang ingin dihapus, lalu datanya langsung dihapus dari database dan program memberi konfirmasi.
-  > <img width="400" alt="image" src="https://github.com/user-attachments/assets/743c96c3-cfbc-42de-ba21-f2d5ab84dab9" />
+  > <img width="500" alt="image" src="https://github.com/user-attachments/assets/e52b6e27-4ce0-44e6-b3ca-72eb79723f2b" />
   Gambar diatas merupakan tampilan semua proyek yang menunjukkan bahwa proyek berhasil dihapus.
 
 - **Menu 5 – Keluar**
