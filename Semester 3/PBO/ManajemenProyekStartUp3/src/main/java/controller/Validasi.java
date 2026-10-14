@@ -3,7 +3,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package controller;
- 
+
+import java.time.DateTimeException;
+import java.time.LocalDate;
+
 /**
  * 
  * @author WINDOWS 11 PRO
@@ -36,13 +39,17 @@ public final class Validasi {
     }
  
     public static boolean isDeadlineValid(String teks) {
+        return parseTanggal(teks) != null;
+    }
+ 
+    public static LocalDate parseTanggal(String teks) {
         if (!isTeksValid(teks)) {
-            return false;
+            return null;
         }
  
         final String[] bagian = teks.trim().split("-");
         if (bagian.length != 3) {
-            return false;
+            return null;
         }
  
         final String tanggal = bagian[0];
@@ -50,17 +57,24 @@ public final class Validasi {
         final String tahun = bagian[2];
  
         if (!isAngka(tanggal) || !isAngka(bulan) || !isAngka(tahun)) {
-            return false;
+            return null;
         }
  
         if (tanggal.length() != 2 || bulan.length() != 2 || tahun.length() != 4) {
-            return false;
+            return null;
         }
  
-        final int nilaiTanggal = Integer.parseInt(tanggal);
-        final int nilaiBulan = Integer.parseInt(bulan);
+        try {
+            return LocalDate.of(Integer.parseInt(tahun), Integer.parseInt(bulan), Integer.parseInt(tanggal));
+        } catch (DateTimeException e) {
+            return null;
+        }
+    }
  
-        return nilaiTanggal >= 1 && nilaiTanggal <= 31
-                && nilaiBulan >= 1 && nilaiBulan <= 12;
+    public static String formatTanggal(LocalDate tanggal) {
+        if (tanggal == null) {
+            return null;
+        }
+        return String.format("%02d-%02d-%04d", tanggal.getDayOfMonth(), tanggal.getMonthValue(), tanggal.getYear());
     }
 }   

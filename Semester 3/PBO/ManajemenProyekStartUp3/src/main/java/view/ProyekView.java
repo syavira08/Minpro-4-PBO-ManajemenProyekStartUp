@@ -180,6 +180,10 @@ public class ProyekView {
             System.out.println();
             System.out.println("------------ INFORMASI PROYEK ------------");
             id = inputTeks("ID Proyek");
+            if (!Validasi.isPilihanValid(id)) {
+                System.out.println("ID Proyek harus berupa angka!");
+                continue;
+            }
             if (!proyekCrud.isIdSudahAda(id)) {
                 break;
             }

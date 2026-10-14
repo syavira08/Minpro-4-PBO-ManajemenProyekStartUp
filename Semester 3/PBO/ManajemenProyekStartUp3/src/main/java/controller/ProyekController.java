@@ -4,79 +4,44 @@
  */
 package controller;
  
+import config.Konfigurasi;
 import java.util.ArrayList;
 import model.Proyek;
-import model.ProyekInternal;
-import model.ProyekKlien;
+import model.ProyekDAO;
+import model.ProyekDAOJdbc;
+import model.ProyekDAOJpa;
  
 /**
  * 
  * @author WINDOWS 11 PRO
  */
 public class ProyekController implements ProyekCrud {
-    private final ArrayList<Proyek> daftarProjek = new ArrayList<>();
- 
-    public ProyekController() {
-        daftarProjek.add(new ProyekInternal(
-                "PRJ001",
-                "Sistem HR Internal",
-                "30-11-2026",
-                "Engineering",
-                "Digitalisasi proses HR perusahaan"
-        ));
- 
-        daftarProjek.add(new ProyekKlien(
-                "PRJ002",
-                "Website Company Profile",
-                "15-12-2026",
-                "PT Maju Bersama",
-                "Pembuatan Website"
-        ));
- 
-        daftarProjek.add(new ProyekInternal(
-                "PRJ003",
-                "Dashboard Analytics",
-                "10-01-2027",
-                "Product",
-                "Monitoring performa aplikasi startup"
-        ));
-    }
+    private final ProyekDAO dao = Konfigurasi.GUNAKAN_ORM ? new ProyekDAOJpa() : new ProyekDAOJdbc();
  
     @Override
     public boolean tambahProjek(Proyek proyek) {
         if (isIdSudahAda(proyek.getIdProjek())) {
             return false;
         }
-        daftarProjek.add(proyek);
-        return true;
+        return dao.tambahProyek(proyek);
     }
  
     @Override
     public ArrayList<Proyek> getDaftarProjek() {
-        return daftarProjek;
-    }
- 
-    private int cariIndexById(String id) {
-        for (int i = 0; i < daftarProjek.size(); i++) {
-            if (daftarProjek.get(i).getIdProjek().equalsIgnoreCase(id)) {
-                return i;
-            }
-        }
-        return -1;
+        return new ArrayList<>(dao.getAllProyek());
     }
  
     @Override
     public boolean isIdSudahAda(String id) {
-        return cariIndexById(id) != -1;
+        return cariProjekById(id) != null;
     }
  
     @Override
     public Proyek cariProjekById(String id) {
-        int index = cariIndexById(id);
-        if (index == -1) {
+        if (!Validasi.isPilihanValid(id)) {
             return null;
         }
-        return daftarProjek.get(index);
+        return dao.cariProyekById(Integer.parseInt(id.trim()));
     }
  
     @Override
@@ -87,16 +52,14 @@ public class ProyekController implements ProyekCrud {
         }
         
         p.update(namaBaru, deadlineBaru, data1, data2);
-        return true;
+        return dao.updateProyek(p);
     }
  
     @Override
     public boolean hapusProjek(String id) {
-        int index = cariIndexById(id);
-        if (index == -1) {
+        if (!Validasi.isPilihanValid(id)) {
             return false;
         }
-        daftarProjek.remove(index);
-        return true;
+        return dao.hapusProyek(Integer.parseInt(id.trim()));
     }
 }

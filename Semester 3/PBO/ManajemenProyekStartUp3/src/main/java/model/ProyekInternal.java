@@ -5,14 +5,29 @@
 package model;
  
 import controller.Validasi;
+import jakarta.persistence.Column;
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
+import jakarta.persistence.PrimaryKeyJoinColumn;
+import jakarta.persistence.Table;
  
 /**
  * 
  * @author WINDOWS 11 PRO
  */
+@Entity
+@Table(name = "proyekinternal")
+@DiscriminatorValue("Internal")
+@PrimaryKeyJoinColumn(name = "idProjek")
+
 public class ProyekInternal extends Proyek {
+    @Column(name = "divisiPeminta", nullable = false, length = 100)
     private String divisiPeminta;
+    @Column(name = "tujuanProjek", nullable = false)
     private String tujuanProjek;
+ 
+    protected ProyekInternal() {
+    }
  
     public ProyekInternal(String idProjek, String namaProjek, String deadline, String divisiPeminta, String tujuanProjek) {
         super(idProjek, namaProjek, deadline);

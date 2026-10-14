@@ -5,24 +5,60 @@
 package model;
  
 import controller.Validasi;
+import jakarta.persistence.Column;
+import jakarta.persistence.DiscriminatorColumn;
+import jakarta.persistence.DiscriminatorType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Inheritance;
+import jakarta.persistence.InheritanceType;
+import jakarta.persistence.Table;
+import java.time.LocalDate;
  
 /**
  * 
  * @author WINDOWS 11 PRO
  */
+@Entity
+@Table(name = "proyek")
+@Inheritance(strategy = InheritanceType.JOINED)
+@DiscriminatorColumn(name = "jenisProjek", discriminatorType = DiscriminatorType.STRING, length = 20)
+
 public abstract class Proyek {
-    private final String idProjek;
+   
+    @Id
+    @Column(name = "idProjek")
+    private Integer idProjek;
+ 
+    @Column(name = "namaProjek", nullable = false, length = 100)
     private String namaProjek;
-    private String deadline;
+ 
+    @Column(name = "deadline", nullable = false)
+    private LocalDate deadline;
+ 
+    protected Proyek() {
+    }
  
     public Proyek(String idProjek, String namaProjek, String deadline) {
-        this.idProjek = idProjek;
+        if (Validasi.isPilihanValid(idProjek)) {
+            this.idProjek = Integer.valueOf(idProjek.trim());
+        } else {
+            System.out.println("ID proyek tidak valid!");
+        }
         setNamaProjek(namaProjek);
         setDeadline(deadline);
     }
  
     public String getIdProjek() {
+        return idProjek == null ? null : String.valueOf(idProjek);
+    }
+ 
+    public int getIdAngka() {
         return idProjek;
+    }
+ 
+    public void setIdAngka(int idProjek) {
+        this.idProjek = idProjek;
     }
  
     public String getNamaProjek() {
@@ -38,12 +74,17 @@ public abstract class Proyek {
     }
  
     public String getDeadline() {
+        return Validasi.formatTanggal(deadline);
+    }
+ 
+    public LocalDate getDeadlineTanggal() {
         return deadline;
     }
  
     public void setDeadline(String deadline) {
-        if (Validasi.isDeadlineValid(deadline)) {
-            this.deadline = deadline;
+        LocalDate tanggal = Validasi.parseTanggal(deadline);
+        if (tanggal != null) {
+            this.deadline = tanggal;
         } else {
             System.out.println("Format deadline tidak valid!");
         }
@@ -62,7 +103,7 @@ public abstract class Proyek {
         System.out.println("Jenis Proyek : " + getJenisProjek());
         System.out.println("ID Proyek    : " + idProjek);
         System.out.println("Nama Proyek  : " + namaProjek);
-        System.out.println("Deadline     : " + deadline);
+        System.out.println("Deadline     : " + getDeadline());
     }
 }
 
