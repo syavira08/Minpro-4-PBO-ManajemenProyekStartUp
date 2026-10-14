@@ -1,8 +1,0 @@
-<?xml version = '1.0' encoding = 'UTF-8'?>
-<OSDM_Design class="oracle.dbtools.crest.model.design.Design" name="minpro1" id="07531989-46F2-2DBB-DF0C-5A302A0A6C10" version="3.5">
-<createdBy>WINDOWS 11 PRO</createdBy>
-<createdTime>2026-09-04 07:40:28 UTC</createdTime>
-<ownerDesignName>minpro1</ownerDesignName>
-<capitalNames>false</capitalNames>
-<designId>07531989-46F2-2DBB-DF0C-5A302A0A6C10</designId>
-</OSDM_Design>
