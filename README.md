@@ -12,34 +12,7 @@ Kedua jenis proyek ini memiliki data umum yang sama (ID, nama, deadline), tetapi
 
 ## 1. Struktur Package
 Program ini menerapkan struktur MVC (Model View Controller), yaitu struktur yang memisahkan program menjadi tiga peran utama yaitu Data (Model), Tampilan (View), dan Pengatur Alur (Controller), ditambah package `main` sebagai titik masuk program dan package `config` untuk pengaturan koneksi database. Berikut struktur package pada program ini:
-
-```
-src/main
-├── java
-│   ├── config
-│   │   ├── Konfigurasi.java
-│   │   ├── Koneksi.java
-│   │   ├── JpaUtil.java
-│   │   └── TestKoneksi.java
-│   ├── controller
-│   │   ├── ProyekCrud.java
-│   │   ├── ProyekController.java
-│   │   └── Validasi.java
-│   ├── main
-│   │   └── MainApp.java
-│   ├── model
-│   │   ├── Proyek.java
-│   │   ├── ProyekInternal.java
-│   │   ├── ProyekKlien.java
-│   │   ├── ProyekDAO.java
-│   │   ├── ProyekDAOJdbc.java
-│   │   └── ProyekDAOJpa.java
-│   └── view
-│       └── ProyekView.java
-└── resources
-    └── META-INF
-        └── persistence.xml
-```
+><img width="500" alt="image" src="https://github.com/user-attachments/assets/e2fc8acb-e12c-4fb8-9f14-59e9c41044a1" />
 
 Penjelasan penerapan MVC pada setiap package:
 
@@ -111,19 +84,18 @@ Disini pengguna diarahkan ke menu sesuai dengan angka yang dimasukkan. Setiap me
 Encapsulation diterapkan dengan menyembunyikan data di dalam kelas dan hanya mengizinkan akses melalui method tertentu, bukan langsung dari luar.
 
 Semua atribut pada kelas `Proyek` dideklarasikan sebagai `private`, sehingga tidak bisa diakses atau diubah langsung dari kelas lain:
-><img width="500" alt="Screenshot 2026-09-24 221304" src="https://github.com/user-attachments/assets/986143df-72d7-4dce-8196-0ec1917bedef" />
+> <img width="600" alt="image" src="https://github.com/user-attachments/assets/e6144db1-da0d-4cd9-a83c-bda5155ba62a" />
 Untuk membaca atau mengubah data tersebut, harus melalui method getter dan setter yang bersifat `public`. Setiap setter juga tidak langsung menyimpan data yang diberikan, melainkan memanggil kelas `Validasi` terlebih dahulu untuk memeriksa kevalidannya. Contohnya pada `setNamaProjek()`:
-><img width="700" alt="Screenshot 2026-09-24 221612" src="https://github.com/user-attachments/assets/d3e3443f-ccc0-4ffa-b30c-3326f23dd7af" />
+><img width="600" alt="image" src="https://github.com/user-attachments/assets/bb2b4da9-f0fa-4117-9dc3-b9700dd8ea5c" />
 
 ### Inheritance
 Inheritance diterapkan pada relasi antar kelas model, di mana satu kelas menurunkan atribut dan method-nya ke kelas lain.
 
 `Proyek` berperan sebagai **superclass** yang menyimpan hal-hal yang dimiliki semua jenis proyek: ID, nama, deadline, serta method umum `getJenisProjek()` dan `cetakData()`:
-><img width="800" alt="image" src="https://github.com/user-attachments/assets/a47720ae-d512-4949-917b-0b9aca6497f9" />
+><img width="800" alt="Screenshot 2026-10-13 094014" src="https://github.com/user-attachments/assets/13f3707b-1f50-43ff-a3eb-a83ed66822cd" />
 `ProyekInternal` dan `ProyekKlien` adalah **subclass** yang meng-*extend* `Proyek`. Keduanya otomatis mendapatkan seluruh atribut dan method milik `Proyek`, lalu menambahkan atribut khas miliknya sendiri. Saat atribut subclass dibuat, konstruktornya memanggil `super(idProjek, namaProjek, deadline)` untuk mengisi data umum lewat kelas induk, sehingga kode tidak perlu ditulis dua kali:
-><img width="600" alt="Screenshot 2026-09-24 221916" src="https://github.com/user-attachments/assets/a6d32303-6bdb-4e2d-b2a4-181377402518" />
-
-><img width="600" alt="Screenshot 2026-09-24 222106" src="https://github.com/user-attachments/assets/b75654dd-6741-472e-b917-6135a340b29b" />
+><img width="900" alt="Screenshot 2026-10-14 201336" src="https://github.com/user-attachments/assets/7c681ad2-4a9b-4b57-ac23-a948c885ca16" />
+><img width="900" alt="image" src="https://github.com/user-attachments/assets/44c17cf5-0925-441d-b1ad-ddf507a1f8b2" />
 Dengan inheritance, penambahan jenis proyek baru menjadi lebih mudah, cukup dengan membuat subclass baru yang meng-*extend* `Proyek`.
 
 ## 4. Penerapan Polymorphism dan Abstraction
